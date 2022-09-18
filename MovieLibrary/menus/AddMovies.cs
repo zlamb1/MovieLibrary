@@ -1,12 +1,9 @@
 ﻿using MovieLibrary.interfaces;
-using MovieLibrary.movieutility;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MovieLibrary.menus
 {
@@ -76,7 +73,6 @@ namespace MovieLibrary.menus
             } else
             {
                 // write movie to file
-                Console.WriteLine("Movie created: " + movie);
                 handler.Input = new List<object> { movie };
                 handler.Write();
             }

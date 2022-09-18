@@ -2,9 +2,6 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieLibrary.movieutility
 {
@@ -32,6 +29,7 @@ namespace MovieLibrary.movieutility
                 logger.Log(LogLevel.Error, "MovieFactory expects a List<Movie> (param 3) " + _params + "!");
                 return null;
             }
+
             string title;
             try
             {
@@ -44,13 +42,39 @@ namespace MovieLibrary.movieutility
             // Add quotes to the title if it contains a comma.
             if (title.Contains(',') && title.Substring(0, 1) != "\"")
                 title = "\"" + title + "\"";
-            int nID = -1;
+            if (title.Equals(""))
+            {
+                logger.Log(LogLevel.Error, "The movie title cannot be blank!");
+                return null;
+            }
+
+            int parsedID = -1;
+            string id;
+            try
+            {
+                id = (string)args[0];
+                if (id != "") parsedID = int.Parse(id);
+            }
+            catch (FormatException)
+            {
+                logger.Log(LogLevel.Error, "ID provided to MovieFactory was not an integer!");
+                return null;
+            }
+            catch (InvalidCastException)
+            {
+                logger.Log(LogLevel.Error, "MovieFactory expects an integer (param 0) " + _params + "!");
+                return null;
+            }
+            
+            int nextID = -1;
             foreach (Movie movie in movies)
             {
                 // find highest movie ID; 
-                if (nID < movie.MovieID)
+                if (nextID < movie.MovieID) nextID = movie.MovieID + 1;
+                if (parsedID == movie.MovieID)
                 {
-                    nID = movie.MovieID + 1;
+                    logger.Log(LogLevel.Error, "The Movie ID you entered already exists!");
+                    return null;
                 }
                 // check if any movies have the same title.
                 if (movie.Title != null && movie.Title.Equals(title))
@@ -59,20 +83,8 @@ namespace MovieLibrary.movieutility
                     return null;
                 }
             }
-            try
-            {
-                string id = (string)args[0];
-                if (id != "") nID = int.Parse(id);
-            } catch (FormatException)
-            {
-                logger.Log(LogLevel.Error, "ID provided to MovieFactory was not an integer!");
-                return null;
-            } catch (InvalidCastException)
-            {
-                logger.Log(LogLevel.Error, "MovieFactory expects an integer (param 0) " + _params + "!");
-                return null;
-            }
-            
+            if (parsedID == -1) parsedID = nextID;
+
             string genres; 
             try
             {
@@ -89,7 +101,7 @@ namespace MovieLibrary.movieutility
                 logger.Log(LogLevel.Error, "No genres provided!");
                 return null;
             }
-            return new Movie(nID, title, genres);
+            return new Movie(parsedID, title, genres);
         }
     }
 }
