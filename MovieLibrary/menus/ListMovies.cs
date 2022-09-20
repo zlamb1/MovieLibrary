@@ -70,8 +70,21 @@ namespace MovieLibrary.menus
                 Console.WriteLine("<-------Results--------->");
                 Results = filter.Output;
             }
-            foreach (object movie in Results)
-                Console.WriteLine(movie);
+            int i = 0;
+            int iter = 10;
+            while (true)
+            {
+                int iterateTo = Math.Min(i * iter + iter, Results.Count);
+                Console.WriteLine("<---" + (i * iter) + " - " + iterateTo + "--->");
+                for (int j = (i * iter); j < iterateTo; j++)
+                {
+                    Console.WriteLine((j + 1) + ". " + Results[j]);
+                }
+                Console.WriteLine("<------------>");
+                bool cont = InputUtility.GetBoolWithPrompt(prompt: "Do you want to print the next " + iter + " results?");
+                if (!cont) break;
+                i++;
+            }
         }
     }
 }
