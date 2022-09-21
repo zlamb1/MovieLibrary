@@ -17,9 +17,13 @@ namespace MovieLibrary
             MovieID = _MovieID;
             Title = _Title;
             Genres = new List<string>();
-            string[] gParts = _Genres.Split('|');
-            foreach (string genre in gParts) 
-                Genres.Add(genre);
+            // Do a null check to ensure that .Split is not being called on a null object.
+            if (_Genres != null)
+            {
+                string[] gParts = _Genres.Split('|');
+                foreach (string genre in gParts)
+                    Genres.Add(genre);
+            }
         }
 
         public override string ToString()

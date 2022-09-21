@@ -54,9 +54,16 @@ namespace MovieLibrary.menus
             string title = InputUtility.GetStringWithPrompt(prompt: "Enter the new movie's title");
             string genres = InputUtility.GetStringWithPrompt(prompt: "Enter the new movies' genres (| delimited)");
             if (genres == "") genres = null;
-            object movie = movieFactory.Create(
-                id, title, genres, 
-                Results.Cast<Movie>().ToList());
+            object movie = null;
+            try
+            {
+                movie = movieFactory.Create(
+                    id, title, genres,
+                    Results.Cast<Movie>().ToList());
+            } catch (Exception)
+            {
+                logger.Log(LogLevel.Error, "Failed to cast MovieFileDao results!");
+            }
             if(movie == null)
             {
                 bool cont = InputUtility.GetBoolWithPrompt(

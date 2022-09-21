@@ -69,14 +69,15 @@ namespace MovieLibrary.movieutility
             int nextID = -1;
             foreach (Movie movie in movies)
             {
-                // find highest movie ID; 
+                // find highest movie ID
                 if (nextID < movie.MovieID) nextID = movie.MovieID + 1;
+                // check if entered ID already exists
                 if (parsedID == movie.MovieID)
                 {
                     logger.Log(LogLevel.Error, "The Movie ID you entered already exists!");
                     return null;
                 }
-                // check if any movies have the same title.
+                // check if any movies have the same title
                 if (movie.Title != null && movie.Title.Equals(title))
                 {
                     logger.Log(LogLevel.Error, "Movie with that title already exists!");
@@ -94,11 +95,6 @@ namespace MovieLibrary.movieutility
             } catch (InvalidCastException)
             {
                 logger.Log(LogLevel.Error, "MovieFactory expects a string (param 2) " + _params + "!");
-                return null;
-            }
-            if (genres == "")
-            {
-                logger.Log(LogLevel.Error, "No genres provided!");
                 return null;
             }
             return new Movie(parsedID, title, genres);
