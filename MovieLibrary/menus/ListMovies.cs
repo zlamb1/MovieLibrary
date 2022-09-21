@@ -50,11 +50,10 @@ namespace MovieLibrary.menus
                 Start();
                 return;
             }
-            // Cast the default List<object> into List<Movie>.
-            // We can now work with the results from the read file.
             Console.WriteLine("Warning: not filtering will print out all of the movies.");
             bool filtering = InputUtility.GetBoolWithPrompt(
                 prompt: "Do you want to filter the results?");
+            // hander.Result = list of movies read from movies.csv
             List<object> Results = handler.Result;
             if (filtering)
             {
