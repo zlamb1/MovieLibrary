@@ -7,5 +7,9 @@ namespace MovieLibrary.models
         public int Seasons { get; set; }
         public int Episodes { get; set; }
         public List<string> Writers { get; set; }
+        public override string Display()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

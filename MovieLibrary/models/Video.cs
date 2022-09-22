@@ -11,5 +11,9 @@ namespace MovieLibrary.models
         public string Format { get; set; }
         public int Length { get; set; }
         public int[] Regions { get; set; }
+        public override string Display()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

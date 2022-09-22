@@ -1,7 +1,4 @@
 ﻿using System;
-using MovieLibrary.interfaces;
-using MovieLibrary.menus;
-using MovieLibrary.movieutility;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -17,10 +14,6 @@ namespace MovieLibrary
                 builder.AddConsole();
                 builder.AddFile("app.log");
             });
-            services.AddSingleton<IMenu, AggregateMenu>()
-                .AddTransient<IFactory<IMenu>, MenuFactory>()
-                .AddTransient<IFileDao, MovieFileDao>()
-                .AddTransient<IFilter, MovieFilter>();
             return services.BuildServiceProvider();
         }
 
