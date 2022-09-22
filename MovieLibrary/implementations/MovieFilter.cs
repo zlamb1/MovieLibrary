@@ -47,8 +47,8 @@ namespace MovieLibrary.movieutility
                         oper = FilterOperator.GreaterThan;
                     }
                     if (oper == FilterOperator.Contains)
-                        filter.Add(x => x.MovieIDString, oper, StringFilter);
-                    else filter.Add(x => x.MovieID, oper, comp);
+                        filter.Add(x => x.IdString, oper, StringFilter);
+                    else filter.Add(x => x.Id, oper, comp);
                 }
                 if (titleFilter.Length > 0)
                 {

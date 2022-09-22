@@ -1,20 +1,15 @@
-﻿using System;
+﻿using MovieLibrary.models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieLibrary
 {
-    internal class Movie
+    internal class Movie : Media
     {
-        public int MovieID { get; set; }
-        public string MovieIDString { get { return MovieID.ToString(); } }
-        public string Title { get; set; }
+        public string IdString { get { return Id.ToString(); } }
         public List<string> Genres { get; set; }
-        public Movie(int _MovieID, string _Title, string _Genres)
+        public Movie(int _Id, string _Title, string _Genres)
         {
-            MovieID = _MovieID;
+            Id = _Id;
             Title = _Title;
             Genres = new List<string>();
             // Do a null check to ensure that .Split is not being called on a null object.
@@ -28,7 +23,7 @@ namespace MovieLibrary
 
         public override string ToString()
         {
-            string str = MovieID + "," + Title + ( Genres.Count > 0 ? "," : "" );
+            string str = Id + "," + Title + ( Genres.Count > 0 ? "," : "" );
             foreach (string genre in Genres)
                 str += genre + "|";
             return str.Remove(str.Length-1);

@@ -70,9 +70,9 @@ namespace MovieLibrary.movieutility
             foreach (Movie movie in movies)
             {
                 // find highest movie ID
-                if (nextID < movie.MovieID) nextID = movie.MovieID + 1;
+                if (nextID < movie.Id) nextID = movie.Id + 1;
                 // check if entered ID already exists
-                if (parsedID == movie.MovieID)
+                if (parsedID == movie.Id)
                 {
                     logger.Log(LogLevel.Error, "The Movie ID you entered already exists!");
                     return null;
