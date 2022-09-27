@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,9 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="data\**" />
-    <EmbeddedResource Remove="data\**" />
-    <None Remove="data\**" />
+    <None Remove="data\movies.csv" />
+    <None Remove="data\shows.csv" />
+    <None Remove="data\videos.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="data\movies.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\shows.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\videos.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

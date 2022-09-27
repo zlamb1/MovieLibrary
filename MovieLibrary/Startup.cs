@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MovieLibrary.implementations;
+using MovieLibrary.interfaces;
 
 namespace MovieLibrary
 {
@@ -13,6 +15,21 @@ namespace MovieLibrary
             {
                 builder.AddConsole();
                 builder.AddFile("app.log");
+            });
+            services.AddTransient<IMenu, AggregateMenu>()
+            .AddTransient<MenuFactory>()
+            .AddTransient<FileDaoFactory>()
+            .AddTransient<Func<int, IFactory>>(provider => key =>
+            {
+                switch (key)
+                {
+                    case 0:
+                        return provider.GetService<MenuFactory>();
+                    case 1:
+                        return provider.GetService<FileDaoFactory>();
+                    default:
+                        return null;
+                }
             });
             return services.BuildServiceProvider();
         }
