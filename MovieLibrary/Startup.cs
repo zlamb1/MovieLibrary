@@ -17,20 +17,8 @@ namespace MovieLibrary
                 builder.AddFile("app.log");
             });
             services.AddTransient<IMenu, AggregateMenu>()
-            .AddTransient<MenuFactory>()
-            .AddTransient<FileDaoFactory>()
-            .AddTransient<Func<int, IFactory>>(provider => key =>
-            {
-                switch (key)
-                {
-                    case 0:
-                        return provider.GetService<MenuFactory>();
-                    case 1:
-                        return provider.GetService<FileDaoFactory>();
-                    default:
-                        return null;
-                }
-            });
+            .AddTransient<IFactory, MenuFactory>()
+            .AddTransient<IFileDao, MediaFileDao>();
             return services.BuildServiceProvider();
         }
 
