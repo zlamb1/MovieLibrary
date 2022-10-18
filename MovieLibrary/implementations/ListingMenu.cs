@@ -7,12 +7,13 @@ namespace MovieLibrary.implementations
 {
     internal class ListingMenu : IMenu
     {
-        private readonly string[] types = { "Movies", "Shows", "Videos" };
+        private readonly string[] mediaTypes; 
         private readonly int mediaType;
         private readonly ILogger<IMenu> logger;
         private readonly IFileDao dao;
-        public ListingMenu(int _mediaType, ILogger<IMenu> _logger, IFileDao _dao)
+        public ListingMenu(string[] _mediaTypes, int _mediaType, ILogger<IMenu> _logger, IFileDao _dao)
         {
+            mediaTypes = _mediaTypes;
             mediaType = _mediaType;
             logger = _logger;
             dao = _dao;
@@ -23,8 +24,8 @@ namespace MovieLibrary.implementations
             {
                 dao.Args = new object[] { mediaType };
                 dao.IgnoreFirstLine = true;
-                dao.File = "data/" + types[mediaType].ToLower() + ".csv";
-                Console.WriteLine("<---" + types[mediaType] + " Listing--->");
+                dao.File = "data/" + mediaTypes[mediaType].ToLower() + ".csv";
+                Console.WriteLine("<---" + mediaTypes[mediaType] + " Listing--->");
                 object[] objects = dao.Read();
                 for (int i = 0; i < Math.Min(10, objects.Length); i++)
                     ((Media)objects[i]).Display();

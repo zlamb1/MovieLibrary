@@ -17,9 +17,10 @@ namespace MovieLibrary.implementations
             Console.WriteLine("1. Movies");
             Console.WriteLine("2. Shows");
             Console.WriteLine("3. Videos");
+            Console.WriteLine("4. Search by Title");
             Choice = InputUtility.GetInt32WithPrompt(
-                prompt: "Which media do you want to display?", 
-                expected: new int[] { 1, 2, 3 });
+                prompt: "Which choice do you want?", 
+                expected: new int[] { 1, 2, 3, 4 });
         }
     }
 }
