@@ -7,7 +7,6 @@ namespace MovieLibrary.implementations
 {
     internal class MenuFactory : IFactory
     {
-        // I don't know if I'm a big fan of passing this into menu instances, but it works for now.
         private static readonly string[] types = { "Movies", "Shows", "Videos" };
 
         private readonly IServiceProvider provider;
