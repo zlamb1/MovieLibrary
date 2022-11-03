@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Program.cs = Program.cs
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieLibraryEntities", "..\MovieLibraryEntities\MovieLibraryEntities.csproj", "{CDBB73FF-DC08-4733-A925-FEEF4B109B0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{7A8A2C83-04C8-40E9-BD16-7880650851E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A8A2C83-04C8-40E9-BD16-7880650851E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A8A2C83-04C8-40E9-BD16-7880650851E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDBB73FF-DC08-4733-A925-FEEF4B109B0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDBB73FF-DC08-4733-A925-FEEF4B109B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDBB73FF-DC08-4733-A925-FEEF4B109B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDBB73FF-DC08-4733-A925-FEEF4B109B0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
