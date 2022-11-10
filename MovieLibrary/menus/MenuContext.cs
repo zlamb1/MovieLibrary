@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MovieLibrary.interfaces;
+using MovieLibrary.menus.MovieMenus;
+using MovieLibrary.Menus.MovieMenus;
 using System;
 
 namespace MovieLibrary.menus
@@ -26,6 +28,9 @@ namespace MovieLibrary.menus
                 {
                     case 1:
                         new SearchMenu(GetLogger<IMenu>()).Start();
+                        break;
+                    case 2:
+                        new AddMenu(GetLogger<IMenu>()).Start();
                         break;
                     default:
                         break;

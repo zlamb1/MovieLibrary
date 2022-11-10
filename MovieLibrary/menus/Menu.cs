@@ -34,6 +34,9 @@ namespace MovieLibrary.menus
             if (numberOfRestarts >= allowedRestarts)
             {
                 logger.Log(LogLevel.Error, "The menu cannot restart more than " + allowedRestarts + " times!");
+                Thread.Sleep(3);
+                Console.WriteLine();
+                WaitForInput();
                 return;
             }
             msg = _msg;

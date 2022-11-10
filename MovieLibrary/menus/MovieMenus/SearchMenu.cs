@@ -1,12 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MovieLibrary.utility;
 using MovieLibraryEntities.Context;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieLibrary.menus.MovieMenus
 {
@@ -22,11 +19,13 @@ namespace MovieLibrary.menus.MovieMenus
         {
             base.Start();
 
-            string title = InputUtility.GetStringWithPrompt("What is title of the movie? ");
+            string title = InputUtility.GetStringWithPrompt("What is title of the movie? (blank for all) ");
 
-            using (var db = new MovieContext())
+            using (var movieContext = new MovieContext())
             {
-                var sorted = db.Movies.Where(x => x.Title.StartsWith(title));
+                var sorted = movieContext.Movies
+                    .Where(x => x.Title.StartsWith(title))
+                    .Include("MovieGenres.Genre");
 
                 Console.WriteLine(sorted.Count() + " Movie(s) returned!");
                 Console.WriteLine();
@@ -34,6 +33,15 @@ namespace MovieLibrary.menus.MovieMenus
                 foreach (var movie in sorted)
                 {
                     Console.WriteLine(movie.Title);
+                    string genresStr = "  Genres => ";
+                    foreach (var genre in movie.MovieGenres)
+                    {
+                        if (genre != movie.MovieGenres.First())
+                            genresStr += " | ";
+                        genresStr += genre.Genre.Name;
+                    }
+                    if (movie.MovieGenres.Count() > 0)
+                        Console.WriteLine(genresStr);
                 }
             }
 
