@@ -1,10 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using MovieLibrary.utility;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace MovieLibrary.menus
 {
@@ -12,12 +8,11 @@ namespace MovieLibrary.menus
     {
         private readonly ILogger<IMenu> logger;
 
-        private string msg;
-        private LogLevel level;
+        private string msg = "Starting...";
+        private LogLevel level = LogLevel.Information;
 
         protected int numberOfRestarts = 0;
         protected int allowedRestarts = 5;
-        protected string statusMsg;
 
         public Menu(ILogger<IMenu> _logger)
         {
@@ -28,6 +23,9 @@ namespace MovieLibrary.menus
         {
             Console.Clear();
             logger.Log(level, msg);
+            // sleep to log before anything else
+            Thread.Sleep(3);
+            Console.WriteLine(DateTime.Now + " | Menu | " + level + " | " + msg);
         }
 
         protected void Restart(string _msg, LogLevel _level = LogLevel.Warning)
@@ -39,6 +37,7 @@ namespace MovieLibrary.menus
             }
             msg = _msg;
             level = _level;
+            numberOfRestarts++;
             Start();
         }
 

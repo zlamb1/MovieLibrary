@@ -9,8 +9,8 @@ namespace MovieLibrary
         static void Main(string[] args)
         {
             var provider = new Startup().ConfigureServices();
-            var aggregateMenu = provider.GetService<IMenu>();
-            aggregateMenu.Start();
+            var mainMenu = provider.GetService<IMenu>();
+            mainMenu.Start();
         }
     }
 }
