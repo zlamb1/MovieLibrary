@@ -42,5 +42,11 @@ namespace MovieLibrary.menus
             Start();
         }
 
+        protected void WaitForInput(string _msg="Press enter to return. ")
+        {
+            Console.Write(_msg);
+            Console.ReadLine();
+        }
+
     }
 }
