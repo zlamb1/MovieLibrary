@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLibrary.menus
+namespace MovieLibrary.menus.MovieMenus
 {
     internal class SearchMenu : Menu
     {
