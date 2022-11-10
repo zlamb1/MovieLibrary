@@ -8,7 +8,7 @@ namespace MovieLibrary.utility
          *  If a function caller wants retries for their prompts, there needs to be a recursion
          *  limit to avoid possible StackOverflows.
          */
-        public static string GetStringWithPrompt(string prompt = "", bool addColon = true)
+        public static string GetStringWithPrompt(string prompt = "", bool addColon = false)
         {
             Console.Write(prompt + (addColon ? ": " : ""));
             return Console.ReadLine();

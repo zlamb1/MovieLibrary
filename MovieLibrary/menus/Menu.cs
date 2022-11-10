@@ -6,13 +6,14 @@ namespace MovieLibrary.menus
 {
     internal class Menu : IMenu
     {
-        private readonly ILogger<IMenu> logger;
-
-        private string msg = "Starting...";
-        private LogLevel level = LogLevel.Information;
-
+        public int Result { get; set; }
+        
         protected int numberOfRestarts = 0;
         protected int allowedRestarts = 5;
+
+        private readonly ILogger<IMenu> logger;
+        private string msg = "Starting...";
+        private LogLevel level = LogLevel.Information;
 
         public Menu(ILogger<IMenu> _logger)
         {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MovieLibraryEntities.Context;
-using System;
+using MovieLibrary.interfaces;
 
 namespace MovieLibrary
 {
@@ -9,8 +8,8 @@ namespace MovieLibrary
         static void Main(string[] args)
         {
             var provider = new Startup().ConfigureServices();
-            var mainMenu = provider.GetService<IMenu>();
-            mainMenu.Start();
+            var menuContext = provider.GetService<IMenuContext>();
+            menuContext.Start();
         }
     }
 }

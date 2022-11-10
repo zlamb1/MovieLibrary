@@ -27,6 +27,8 @@ namespace MovieLibrary.menus
                 Restart("That is not a valid choice!");
                 return;
             }
+
+            Result = choice.Item2;
         }
     }
 }

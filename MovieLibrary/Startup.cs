@@ -2,6 +2,7 @@
 using MovieLibrary.menus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MovieLibrary.interfaces;
 
 namespace MovieLibrary
 {
@@ -15,7 +16,8 @@ namespace MovieLibrary
                 builder.AddConsole();
                 builder.AddFile("app.log");
             });
-            services.AddSingleton<IMenu, MainMenu>();
+            services.AddSingleton<IMenu, MainMenu>()
+            .AddSingleton<IMenuContext, MenuContext>();
             return services.BuildServiceProvider();
         }
 
