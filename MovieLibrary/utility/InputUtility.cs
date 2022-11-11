@@ -4,10 +4,6 @@ namespace MovieLibrary.utility
 {
     public static class InputUtility
     {
-        /*
-         *  If a function caller wants retries for their prompts, there needs to be a recursion
-         *  limit to avoid possible StackOverflows.
-         */
         public static string GetStringWithPrompt(string prompt = "", bool addColon = false)
         {
             Console.Write(prompt + (addColon ? ": " : ""));
@@ -28,8 +24,24 @@ namespace MovieLibrary.utility
         }
         public static bool GetBoolWithPrompt(string prompt = "")
         {
-            return false;
-        }
+            Console.Write(prompt + " ");
+            string resp = Console.ReadLine();
 
+            switch (resp.ToLower())
+            {
+                case "0":
+                case "n":
+                case "no":
+                case "false":
+                    return false;
+                case "1":
+                case "y":
+                case "yes":
+                case "true":
+                    return true;
+                default:
+                    return false;
+            }
+        }
     }
 }
