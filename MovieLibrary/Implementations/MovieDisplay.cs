@@ -1,11 +1,7 @@
-﻿using Chronic.Core.Tags;
-using MovieLibrary.Interfaces;
+﻿using MovieLibrary.Interfaces;
 using MovieLibraryEntities.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieLibrary.Implementations
 {

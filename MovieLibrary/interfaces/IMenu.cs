@@ -1,4 +1,4 @@
-﻿namespace MovieLibrary
+﻿namespace MovieLibrary.Interfaces
 {
     internal interface IMenu
     {

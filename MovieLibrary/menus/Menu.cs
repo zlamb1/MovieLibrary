@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
+using MovieLibrary.Interfaces;
 using System;
 using System.Threading;
 
-namespace MovieLibrary.menus
+namespace MovieLibrary.Menus
 {
     internal class Menu : IMenu
     {

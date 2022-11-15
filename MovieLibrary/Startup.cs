@@ -1,11 +1,11 @@
 ﻿using System;
-using MovieLibrary.menus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MovieLibrary.interfaces;
-using MovieLibrary.Interfaces;
 using MovieLibraryEntities.Models;
+
+using MovieLibrary.Interfaces;
 using MovieLibrary.Implementations;
+using MovieLibrary.Menus;
 
 namespace MovieLibrary
 {
@@ -21,11 +21,11 @@ namespace MovieLibrary
             });
             services.AddSingleton<IMenu, MainMenu>()
             .AddSingleton<IMenuContext, MenuContext>()
+            .AddTransient<IFinder<Movie>, MovieFinder>()
             .AddTransient<IDisplay<Movie>, MovieDisplay>()
             .AddTransient<IUpdater<Movie>, MovieUpdater>()
             .AddTransient<IDeleter<Movie>, MovieDeleter>();
             return services.BuildServiceProvider();
         }
-
     }
 }

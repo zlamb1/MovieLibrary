@@ -1,14 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MovieLibrary.interfaces;
 using MovieLibrary.Interfaces;
-using MovieLibrary.menus.MovieMenus;
 using MovieLibrary.Menus.MovieMenus;
 using MovieLibraryEntities.Models;
 using System;
 
-namespace MovieLibrary.menus
+namespace MovieLibrary.Menus
 {
     internal class MenuContext : IMenuContext
     {
@@ -31,24 +28,24 @@ namespace MovieLibrary.menus
                         new SearchMenu(
                             GetLogger<IMenu>(),
                             provider.GetService<IDisplay<Movie>>())
-                        .Start();
+                            .Start();
                         break;
                     case 2:
                         new AddMenu(GetLogger<IMenu>())
-                        .Start();
+                            .Start();
                         break;
                     case 3:
                         new UpdateMenu(
                             GetLogger<IMenu>(),
                             provider.GetService<IDisplay<Movie>>(), 
                             provider.GetService<IUpdater<Movie>>())
-                        .Start();
+                            .Start();
                         break;
                     case 4:
                         new DeleteMenu(
                             GetLogger<IMenu>(),
                             provider.GetService<IDeleter<Movie>>())
-                        .Start();
+                            .Start();
                         break;
                     default:
                         break;

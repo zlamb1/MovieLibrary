@@ -7,7 +7,7 @@ using MovieLibraryEntities.Models;
 using System;
 using System.Linq;
 
-namespace MovieLibrary.menus.MovieMenus
+namespace MovieLibrary.Menus.MovieMenus
 {
     internal class SearchMenu : Menu
     {
@@ -20,7 +20,7 @@ namespace MovieLibrary.menus.MovieMenus
         public override void Start()
         {
             base.Start();
-            string title = InputUtility.GetStringWithPrompt("What is title of the movie? (blank for all) ");
+            string title = InputUtility.GetStringWithPrompt("What is title of the movie? (blank for all)\n");
             using (var movieContext = new MovieContext())
             {
                 // sort out movies that have a matching title then eager load their genres and reviews

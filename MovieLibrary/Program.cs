@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MovieLibrary.interfaces;
+using MovieLibrary.Interfaces;
 
 namespace MovieLibrary
 {
