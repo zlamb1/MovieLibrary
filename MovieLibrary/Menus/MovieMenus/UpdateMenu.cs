@@ -1,22 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using MovieLibrary.Interfaces;
 using MovieLibrary.utility;
-using MovieLibraryEntities.Context;
 using MovieLibraryEntities.Models;
 using System;
-using System.Linq;
 
 namespace MovieLibrary.Menus.MovieMenus
 {
     internal class UpdateMenu : Menu
     {
         private IDisplay<Movie> display;
+        private IFinder<Movie> finder;
         private IUpdater<Movie> updater;
 
-        public UpdateMenu(ILogger<IMenu> _logger, IDisplay<Movie> _display, IUpdater<Movie> _updater) : base(_logger)
+        public UpdateMenu(ILogger<IMenu> _logger, 
+            IDisplay<Movie> _display, 
+            IFinder<Movie> _finder,
+            IUpdater<Movie> _updater) : base(_logger)
         {
             display = _display;
+            finder = _finder;
             updater = _updater;
         }
 
@@ -31,66 +33,57 @@ namespace MovieLibrary.Menus.MovieMenus
                 return;
             }
 
-            Movie movie = null;
-            int fieldChoice = 0;
-            string value = null;
 
-            using (var movieContext = new MovieContext())
+
+            var movie = finder.First(title);
+
+            if (movie is null)
             {
-                movie = movieContext.Movies
-                    .Include("MovieGenres.Genre")
-                    .Include("UserMovies.User")
-                    .FirstOrDefault(x => x.Title.StartsWith(title));
+                Restart("Could not find any movies with that title!");
+                return;
+            }
 
-                if (movie is null)
-                {
-                    Restart("Could not find any movies with that title!");
-                    return;
-                }
+            Console.WriteLine();
+            display.Display(movie);
+            Console.WriteLine();
+            Console.WriteLine("Choose an option: ");
+            Console.WriteLine("1) Update Title");
+            Console.WriteLine("2) Update Genres");
+            Console.WriteLine("3) Update Release Date");
 
-                Console.WriteLine();
-                display.Display(movie);
-                Console.WriteLine();
-                Console.WriteLine("Choose an option: ");
-                Console.WriteLine("1) Update Title");
-                Console.WriteLine("2) Update Genres");
-                Console.WriteLine("3) Update Release Date");
+            var choice = InputUtility.GetInt32WithPrompt();
 
-                var choice = InputUtility.GetInt32WithPrompt();
-                if (!choice.Item1 || (choice.Item2 < 1 || choice.Item2 > 3))
-                {
-                    Restart("That is not a valid choice! (1 - 3)");
-                    return;
-                }
+            if (!choice.Item1 || (choice.Item2 < 1 || choice.Item2 > 3))
+            {
+                Restart("That is not a valid choice! (1 - 3)");
+                return;
+            }
 
-                fieldChoice = choice.Item2;
+            Console.WriteLine();
 
-                Console.WriteLine();
-
-                switch (fieldChoice)
-                {
-                    case 1:
-                        value = InputUtility.GetStringWithPrompt("What is the new title of the movie?\n");
-                        break;
-                    case 2:
-                        value = InputUtility.GetStringWithPrompt("What are the new genres of the movie? (| delimited)\n");
-                        break;
-                    case 3:
-                        value = InputUtility.GetStringWithPrompt("What is the new release date of the movie? (blank for current date)\n");
-                        break;
-                }
+            string value = null;
+            switch (choice.Item2)
+            {
+                case 1:
+                    value = InputUtility.GetStringWithPrompt("What is the new title of the movie?\n");
+                    break;
+                case 2:
+                    value = InputUtility.GetStringWithPrompt("What are the new genres of the movie? (| delimited)\n");
+                    break;
+                case 3:
+                    value = InputUtility.GetStringWithPrompt("What is the new release date of the movie? (blank for current date)\n");
+                    break;
             }
 
             try
             {
-                updater.Update(movie, fieldChoice, value);
+                updater.Update(movie, choice.Item2, value);
             }
             catch (Exception exc)
             {
                 Console.WriteLine(exc.Message);
                 Console.WriteLine(exc.InnerException);
             }
-
 
             Console.WriteLine();
             WaitForInput();
