@@ -27,6 +27,7 @@ namespace MovieLibrary.Menus
                     case 1:
                         new SearchMenu(
                             GetLogger<IMenu>(),
+                            provider.GetService<IFinder<Movie>>(),
                             provider.GetService<IDisplay<Movie>>())
                             .Start();
                         break;
