@@ -44,6 +44,12 @@ namespace MovieLibrary.menus
                             provider.GetService<IUpdater<Movie>>())
                         .Start();
                         break;
+                    case 4:
+                        new DeleteMenu(
+                            GetLogger<IMenu>(),
+                            provider.GetService<IDeleter<Movie>>())
+                        .Start();
+                        break;
                     default:
                         break;
                 }

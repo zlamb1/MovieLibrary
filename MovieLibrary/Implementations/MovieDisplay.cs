@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLibrary.Display
+namespace MovieLibrary.Implementations
 {
     internal class MovieDisplay : IDisplay<Movie>
     {
@@ -15,7 +15,7 @@ namespace MovieLibrary.Display
 
         public bool DisplayGenres { get; set; }
         public bool DisplayReviews { get; set; }
-        
+
         public MovieDisplay()
         {
             DisplayGenres = true;
@@ -24,7 +24,7 @@ namespace MovieLibrary.Display
 
         public void Display(Movie movie)
         {
-            Console.WriteLine(movie.Title);
+            Console.WriteLine(movie.Title + " =>");
             Console.WriteLine(TAB + "Release Date: " + movie.ReleaseDate);
             string genresStr = TAB + "Genres => ";
             foreach (var genre in movie.MovieGenres)

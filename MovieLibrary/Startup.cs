@@ -4,9 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MovieLibrary.interfaces;
 using MovieLibrary.Interfaces;
-using MovieLibrary.Display;
 using MovieLibraryEntities.Models;
-using MovieLibrary.Updater;
+using MovieLibrary.Implementations;
 
 namespace MovieLibrary
 {
@@ -23,7 +22,8 @@ namespace MovieLibrary
             services.AddSingleton<IMenu, MainMenu>()
             .AddSingleton<IMenuContext, MenuContext>()
             .AddTransient<IDisplay<Movie>, MovieDisplay>()
-            .AddTransient<IUpdater<Movie>, MovieUpdater>();
+            .AddTransient<IUpdater<Movie>, MovieUpdater>()
+            .AddTransient<IDeleter<Movie>, MovieDeleter>();
             return services.BuildServiceProvider();
         }
 

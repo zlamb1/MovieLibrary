@@ -4,7 +4,7 @@ using MovieLibraryEntities.Models;
 using System;
 using System.Linq;
 
-namespace MovieLibrary.Updater
+namespace MovieLibrary.Implementations
 {
     internal class MovieUpdater : IUpdater<Movie>
     {

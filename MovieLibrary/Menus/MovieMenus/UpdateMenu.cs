@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MovieLibrary.Display;
 using MovieLibrary.Interfaces;
 using MovieLibrary.menus;
 using MovieLibrary.utility;
