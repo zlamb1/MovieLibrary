@@ -33,23 +33,23 @@ namespace MovieLibrary.Menus.MovieMenus
 
             // TODO: add genre selection
 
-            var releaseDateStr = InputUtility.GetStringWithPrompt("What is the movie's release date (blank for current date)?\n");
+            var releaseDateStr = InputUtility.GetStringWithPrompt("What is the movie's release date? (blank for current date)\n");
             if (string.IsNullOrEmpty(releaseDateStr))
                 movie.ReleaseDate = DateTime.Now;
             else
                 movie.ReleaseDate = DateTime.Parse(releaseDateStr);
-
-            Console.WriteLine();
-            Console.WriteLine("Generated new movie => ");
-            Console.WriteLine("    Id: " + movie.Id);
-            Console.WriteLine("    Title: " + movie.Title);
-            Console.WriteLine("    Release Date: " + movie.ReleaseDate);
 
             using (var db = new MovieContext())
             {
                 db.Add(movie);
                 db.SaveChanges();
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Generated new movie => ");
+            Console.WriteLine("    Id: " + movie.Id);
+            Console.WriteLine("    Title: " + movie.Title);
+            Console.WriteLine("    Release Date: " + movie.ReleaseDate);
 
             Console.WriteLine();
             WaitForInput();

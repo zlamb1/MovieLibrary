@@ -39,6 +39,7 @@ namespace MovieLibrary.Menus
                         new UpdateMenu(
                             GetLogger<IMenu>(),
                             provider.GetService<IDisplay<Movie>>(), 
+                            provider.GetService<IFinder<Movie>>(),
                             provider.GetService<IUpdater<Movie>>())
                             .Start();
                         break;
