@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieLibrary.interfaces
+namespace MovieLibrary.Interfaces
 {
-    internal interface IMenuContext
+    internal interface IDisplay<T>
     {
-        public void Start();
-
+        public void Display(T obj);
     }
 }

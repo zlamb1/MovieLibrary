@@ -23,10 +23,14 @@ namespace MovieLibrary.menus
         public virtual void Start()
         {
             Console.Clear();
+
             logger.Log(level, msg);
+
             // sleep to log before anything else
             Thread.Sleep(3);
+
             Console.WriteLine(DateTime.Now + " | Menu | " + level + " | " + msg);
+            Console.WriteLine();
         }
 
         protected void Restart(string _msg, LogLevel _level = LogLevel.Warning)
@@ -39,9 +43,11 @@ namespace MovieLibrary.menus
                 WaitForInput();
                 return;
             }
+
             msg = _msg;
             level = _level;
             numberOfRestarts++;
+
             Start();
         }
 
