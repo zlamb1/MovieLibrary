@@ -29,11 +29,14 @@ namespace MovieLibrary.Menus
                             GetLogger<IMenu>(),
                             provider.GetService<IFinder<Movie>>(),
                             provider.GetService<IDisplay<Movie>>())
-                            .Start();
+                        .Start();
                         break;
                     case 2:
-                        new AddMenu(GetLogger<IMenu>())
-                            .Start();
+                        new AddMenu(
+                            GetLogger<IMenu>(),
+                            provider.GetService<IBuilder<Movie>>(),
+                            provider.GetService<IDisplay<Movie>>())
+                        .Start();
                         break;
                     case 3:
                         new UpdateMenu(
@@ -41,13 +44,13 @@ namespace MovieLibrary.Menus
                             provider.GetService<IDisplay<Movie>>(), 
                             provider.GetService<IFinder<Movie>>(),
                             provider.GetService<IUpdater<Movie>>())
-                            .Start();
+                        .Start();
                         break;
                     case 4:
                         new DeleteMenu(
                             GetLogger<IMenu>(),
                             provider.GetService<IDeleter<Movie>>())
-                            .Start();
+                        .Start();
                         break;
                     default:
                         break;

@@ -44,7 +44,15 @@ namespace MovieLibrary.Menus.MovieMenus
                     Console.WriteLine();
                 }
 
-                display.Display(movie);
+                try
+                {
+                    display.Display(movie);
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                }
+
                 index++;
             }
 

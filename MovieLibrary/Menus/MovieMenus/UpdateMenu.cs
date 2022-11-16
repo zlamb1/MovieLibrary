@@ -33,8 +33,6 @@ namespace MovieLibrary.Menus.MovieMenus
                 return;
             }
 
-
-
             var movie = finder.First(title);
 
             if (movie is null)
@@ -44,7 +42,16 @@ namespace MovieLibrary.Menus.MovieMenus
             }
 
             Console.WriteLine();
-            display.Display(movie);
+            
+            try
+            {
+                display.Display(movie);
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+            }
+
             Console.WriteLine();
             Console.WriteLine("Choose an option: ");
             Console.WriteLine("1) Update Title");
@@ -82,7 +89,6 @@ namespace MovieLibrary.Menus.MovieMenus
             catch (Exception exc)
             {
                 Console.WriteLine(exc.Message);
-                Console.WriteLine(exc.InnerException);
             }
 
             Console.WriteLine();

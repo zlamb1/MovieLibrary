@@ -5,51 +5,53 @@ using MovieLibrary.utility;
 using MovieLibraryEntities.Context;
 using MovieLibraryEntities.Models;
 using System;
+using System.Security.Principal;
 
 namespace MovieLibrary.Menus.MovieMenus
 {
     internal class AddMenu : Menu
     {
-        public AddMenu(ILogger<IMenu> _logger) : base(_logger)
-        {
 
+        private IBuilder<Movie> builder;
+        private IDisplay<Movie> display;
+
+        public AddMenu(ILogger<IMenu> _logger, 
+            IBuilder<Movie> _builder,
+            IDisplay<Movie> _display) : base(_logger)
+        {
+            builder = _builder;
+            display = _display;
         }
 
         public override void Start()
         {
             base.Start();
 
-            var movie = new Movie();
-
             var title = InputUtility.GetStringWithPrompt("What is the title of the movie?\n");
-            if (string.IsNullOrEmpty(title))
-            {
-                Restart("The movie title cannot be null/blank!");
-                return;
-            }
-            movie.Title = title;
-
             Console.WriteLine();
 
-            // TODO: add genre selection
-
-            var releaseDateStr = InputUtility.GetStringWithPrompt("What is the movie's release date? (blank for current date)\n");
-            if (string.IsNullOrEmpty(releaseDateStr))
-                movie.ReleaseDate = DateTime.Now;
-            else
-                movie.ReleaseDate = DateTime.Parse(releaseDateStr);
-
-            using (var db = new MovieContext())
+            var placeholderTitle = title;
+            if (string.IsNullOrEmpty(placeholderTitle))
             {
-                db.Add(movie);
-                db.SaveChanges();
+                placeholderTitle = "(no title specified)";
             }
 
+            var genres = InputUtility.GetStringWithPrompt(
+                $"What are the genres of {placeholderTitle}? " +
+                $"(| delimited, blank for none)\n");
             Console.WriteLine();
-            Console.WriteLine("Generated new movie => ");
-            Console.WriteLine("    Id: " + movie.Id);
-            Console.WriteLine("    Title: " + movie.Title);
-            Console.WriteLine("    Release Date: " + movie.ReleaseDate);
+
+            var releaseDate = InputUtility.GetStringWithPrompt(
+                $"What is {placeholderTitle}'s release date? (blank for current date)\n");
+            Console.WriteLine();
+
+            try
+            {
+                var movie = builder.Build(title, genres, releaseDate);
+                display.Display(movie);
+            } catch(Exception exc) { 
+                Console.WriteLine(exc.Message);
+            }
 
             Console.WriteLine();
             WaitForInput();

@@ -27,7 +27,7 @@ namespace MovieLibrary.Implementations
                         "Could not find a movie with the title => " + name);
                 } else
                 {
-                    logger.LogInformation("Deleting movie => " + name);
+                    logger.LogInformation("Deleting Movie => " + name);
                     ctx.Movies.Remove(movie);
                 }
 

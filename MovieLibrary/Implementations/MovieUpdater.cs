@@ -31,6 +31,15 @@ namespace MovieLibrary.Implementations
             {
                 throw new InvalidOperationException("The movie title cannot be null!");
             }
+
+            using (var ctx = new MovieContext())
+            {
+                var aMovie = ctx.Movies
+                    .FirstOrDefault(x => x.Id == movie.Id);
+                aMovie.Title = val;
+                ctx.SaveChanges();
+            }
+
             movie.Title = val;
         }
         private void UpdateGenres(Movie movie, string val)
@@ -53,7 +62,7 @@ namespace MovieLibrary.Implementations
                         .FirstOrDefault(x => x.Name.Equals(genre));
 
                     if (found is null)
-                        throw new InvalidOperationException("The movie genre " + genre + " is not a valid genre!");
+                        throw new InvalidOperationException($"The movie genre {genre} is not a valid genre!");
 
                     MovieGenre movieGenre = new MovieGenre();
                     movieGenre.Movie = ctx.Movies
@@ -72,7 +81,14 @@ namespace MovieLibrary.Implementations
             {
                 date = DateTime.Parse(val);
             }
-            movie.ReleaseDate = date;
+
+            using (var ctx = new MovieContext())
+            {
+                var aMovie = ctx.Movies
+                    .FirstOrDefault(x => x.Id == movie.Id);
+                aMovie.ReleaseDate = date;
+                ctx.SaveChanges();
+            }
         }
     }
 }

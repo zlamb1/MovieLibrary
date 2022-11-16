@@ -23,6 +23,7 @@ namespace MovieLibrary
             .AddSingleton<IMenuContext, MenuContext>()
             .AddTransient<IFinder<Movie>, MovieFinder>()
             .AddTransient<IDisplay<Movie>, MovieDisplay>()
+            .AddTransient<IBuilder<Movie>, MovieBuilder>()
             .AddTransient<IUpdater<Movie>, MovieUpdater>()
             .AddTransient<IDeleter<Movie>, MovieDeleter>();
             return services.BuildServiceProvider();

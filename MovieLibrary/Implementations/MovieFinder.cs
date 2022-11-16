@@ -15,7 +15,6 @@ namespace MovieLibrary.Implementations
             {
                 return ctx.Movies
                     .Include("MovieGenres.Genre")
-                    .Include("UserMovies.User")
                     .FirstOrDefault(x => x.Title.StartsWith(name));
             }
         }
@@ -27,7 +26,7 @@ namespace MovieLibrary.Implementations
                 return ctx.Movies
                     .Where(x => x.Title.StartsWith(name))
                     .Include("MovieGenres.Genre")
-                    .Include("UserMovies.User").ToList();
+                    .ToList();
             }
         }
     }
