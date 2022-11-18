@@ -4,7 +4,7 @@ using MovieLibraryEntities.Models;
 using System;
 using System.Linq;
 
-namespace MovieLibrary.Implementations
+namespace MovieLibrary.Implementations.MovieImpl
 {
     internal class MovieDisplay : IDisplay<Movie>
     {

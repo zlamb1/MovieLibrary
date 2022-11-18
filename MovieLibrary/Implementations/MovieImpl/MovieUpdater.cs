@@ -6,15 +6,15 @@ using MovieLibraryEntities.Models;
 using System;
 using System.Linq;
 
-namespace MovieLibrary.Implementations
+namespace MovieLibrary.Implementations.MovieImpl
 {
     internal class MovieUpdater : IUpdater<Movie>
     {
 
         private ILogger<IUpdater<Movie>> logger;
 
-        public MovieUpdater(ILogger<IUpdater<Movie>> _logger) 
-        { 
+        public MovieUpdater(ILogger<IUpdater<Movie>> _logger)
+        {
             logger = _logger;
         }
 

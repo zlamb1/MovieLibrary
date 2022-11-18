@@ -5,13 +5,14 @@ using MovieLibraryEntities.Models;
 using System;
 using System.Linq;
 
-namespace MovieLibrary.Implementations
+namespace MovieLibrary.Implementations.MovieImpl
 {
     internal class MovieDeleter : IDeleter<Movie>
     {
 
         private readonly ILogger<IDeleter<Movie>> logger;
-        public MovieDeleter(ILogger<IDeleter<Movie>> _logger) {
+        public MovieDeleter(ILogger<IDeleter<Movie>> _logger)
+        {
             logger = _logger;
         }
 
@@ -26,7 +27,8 @@ namespace MovieLibrary.Implementations
                     logger.LogWarning("Could not find a movie with the title => " + name);
                     throw new ArgumentException(
                         "Could not find a movie with the title => " + name);
-                } else
+                }
+                else
                 {
                     logger.LogInformation("Deleting Movie => " + name);
                     ctx.Movies.Remove(aMovie);

@@ -5,7 +5,7 @@ using MovieLibraryEntities.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MovieLibrary.Implementations
+namespace MovieLibrary.Implementations.MovieImpl
 {
     internal class MovieFinder : IFinder<Movie>
     {

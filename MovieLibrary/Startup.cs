@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 using MovieLibraryEntities.Models;
 
 using MovieLibrary.Interfaces;
-using MovieLibrary.Implementations;
 using MovieLibrary.Menus;
+using MovieLibrary.Implementations.MovieImpl;
 
 namespace MovieLibrary
 {

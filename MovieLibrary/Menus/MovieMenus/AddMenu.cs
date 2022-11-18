@@ -1,11 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using MovieLibrary.Interfaces;
-using MovieLibrary.Menus;
 using MovieLibrary.utility;
-using MovieLibraryEntities.Context;
 using MovieLibraryEntities.Models;
 using System;
-using System.Security.Principal;
 
 namespace MovieLibrary.Menus.MovieMenus
 {

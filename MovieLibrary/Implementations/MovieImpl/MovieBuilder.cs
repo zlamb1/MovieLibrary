@@ -1,12 +1,10 @@
 ﻿using MovieLibrary.Interfaces;
-using MovieLibrary.utility;
 using MovieLibraryEntities.Context;
 using MovieLibraryEntities.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace MovieLibrary.Implementations
+namespace MovieLibrary.Implementations.MovieImpl
 {
     internal class MovieBuilder : IBuilder<Movie>
     {
@@ -66,7 +64,7 @@ namespace MovieLibrary.Implementations
                     ctx.SaveChanges();
                 }
             }
-            
+
             return movie;
         }
     }
