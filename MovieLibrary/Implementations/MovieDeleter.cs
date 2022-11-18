@@ -19,16 +19,17 @@ namespace MovieLibrary.Implementations
         {
             using (var ctx = new MovieContext())
             {
-                var movie = ctx.Movies.FirstOrDefault(x => x.Title.Equals(name));
+                var aMovie = ctx.Movies.FirstOrDefault(x => x.Title.Equals(name));
 
-                if (movie is null)
+                if (aMovie is null)
                 {
+                    logger.LogWarning("Could not find a movie with the title => " + name);
                     throw new ArgumentException(
                         "Could not find a movie with the title => " + name);
                 } else
                 {
                     logger.LogInformation("Deleting Movie => " + name);
-                    ctx.Movies.Remove(movie);
+                    ctx.Movies.Remove(aMovie);
                 }
 
                 ctx.SaveChanges();

@@ -11,6 +11,7 @@ namespace MovieLibrary.Implementations
         private static string TAB = "  ";
 
         public bool DisplayGenres { get; set; }
+
         public bool DisplayReviews { get; set; }
 
         public MovieDisplay()
