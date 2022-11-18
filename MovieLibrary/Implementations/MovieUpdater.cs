@@ -1,4 +1,6 @@
-﻿using MovieLibrary.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using MovieLibrary.Interfaces;
 using MovieLibraryEntities.Context;
 using MovieLibraryEntities.Models;
 using System;
@@ -8,6 +10,14 @@ namespace MovieLibrary.Implementations
 {
     internal class MovieUpdater : IUpdater<Movie>
     {
+
+        private ILogger<IUpdater<Movie>> logger;
+
+        public MovieUpdater(ILogger<IUpdater<Movie>> _logger) 
+        { 
+            logger = _logger;
+        }
+
         public void Update(Movie movie, int fieldNum, string val)
         {
             switch (fieldNum)
@@ -22,6 +32,7 @@ namespace MovieLibrary.Implementations
                     UpdateReleaseDate(movie, val);
                     break;
                 default:
+                    logger.LogWarning("Invalid field number!");
                     throw new InvalidOperationException("Invalid field number!");
             }
         }
@@ -29,6 +40,7 @@ namespace MovieLibrary.Implementations
         {
             if (string.IsNullOrEmpty(val))
             {
+                logger.LogWarning("The movie title cannot be null!");
                 throw new InvalidOperationException("The movie title cannot be null!");
             }
 
@@ -36,7 +48,16 @@ namespace MovieLibrary.Implementations
             {
                 var aMovie = ctx.Movies
                     .FirstOrDefault(x => x.Id == movie.Id);
+
+                if (aMovie is null)
+                {
+                    logger.LogWarning($"Could not find the movie =>{val}!");
+                    throw new InvalidOperationException($"Could not find the movie => {val}!");
+                }
+
+                logger.LogInformation($"Changing Title {aMovie.Title} => {val}");
                 aMovie.Title = val;
+
                 ctx.SaveChanges();
             }
 
@@ -46,13 +67,25 @@ namespace MovieLibrary.Implementations
         {
             if (string.IsNullOrEmpty(val))
             {
+                logger.LogWarning("The movie genres cannot be null!");
                 throw new InvalidOperationException("The movie genres cannot be null!");
             }
             string[] strGenres = val.Replace(" ", "").Split("|");
             using (var ctx = new MovieContext())
             {
-                foreach (var movieGenre in movie.MovieGenres)
+                var aMovie = ctx.Movies
+                    .Include("MovieGenres.Genre")
+                    .FirstOrDefault(x => x.Id == movie.Id);
+                if (aMovie is null)
                 {
+                    logger.LogWarning($"Could not find the movie => {val}!");
+                    throw new InvalidOperationException($"Could not find the movie => {val}!");
+                }
+
+                foreach (var movieGenre in aMovie.MovieGenres)
+                {
+                    logger.LogInformation(
+                        $"Removing Genre => {movieGenre.Genre.Name}");
                     ctx.MovieGenres.Remove(movieGenre);
                 }
 
@@ -60,14 +93,19 @@ namespace MovieLibrary.Implementations
                 {
                     Genre found = ctx.Genres
                         .FirstOrDefault(x => x.Name.Equals(genre));
-
                     if (found is null)
-                        throw new InvalidOperationException($"The movie genre {genre} is not a valid genre!");
+                    {
+                        logger.LogWarning($"The movie genre {genre} is not a valid genre!");
+                        throw new InvalidOperationException(
+                            $"The movie genre {genre} is not a valid genre!");
+                    }
 
                     MovieGenre movieGenre = new MovieGenre();
-                    movieGenre.Movie = ctx.Movies
-                        .FirstOrDefault(x => x.Id == movie.Id);
+                    movieGenre.Movie = aMovie;
                     movieGenre.Genre = found;
+
+                    logger.LogInformation(
+                        $"Adding Genre => {found.Name}");
                     ctx.MovieGenres.Add(movieGenre);
                 }
 
@@ -86,7 +124,15 @@ namespace MovieLibrary.Implementations
             {
                 var aMovie = ctx.Movies
                     .FirstOrDefault(x => x.Id == movie.Id);
+                if (aMovie is null)
+                {
+                    logger.LogWarning($"Could not find the movie => {val}!");
+                    throw new InvalidOperationException($"Could not find the movie => {val}!");
+                }
+
+                logger.LogInformation($"Changing Release Date {aMovie.ReleaseDate} => {date}");
                 aMovie.ReleaseDate = date;
+
                 ctx.SaveChanges();
             }
         }
