@@ -9,7 +9,7 @@ namespace MovieLibrary.Menus
     {
         public MainMenu(ILogger<IMenu> _logger) : base(_logger)
         {
-
+            
         }
 
         public override void Start()
