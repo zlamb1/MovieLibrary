@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MovieLibrary.Interfaces;
+using MovieLibrary.Menus.MovieMenus;
 using MovieLibrary.utility;
 using System;
 
@@ -15,11 +16,9 @@ namespace MovieLibrary.Menus
         public override void Start()
         {
             base.Start();
-            Console.WriteLine("Choose an option: ");
-            Console.WriteLine("1) Search Movies");
-            Console.WriteLine("2) Add Movie");
-            Console.WriteLine("3) Update Movie");
-            Console.WriteLine("4) Delete Movie");
+            Console.WriteLine("Choose a menu to start: ");
+            Console.WriteLine("1) Movie Menu");
+            Console.WriteLine("2) User Menu");
             var choice = InputUtility.GetInt32WithPrompt();
             if (!choice.Item1 || (choice.Item2 < 1 || choice.Item2 > 4))
             {

@@ -24,7 +24,7 @@ namespace MovieLibrary.Implementations.MovieImpl
         {
             Console.WriteLine($"{movie.Title} =>");
 
-            Console.WriteLine($"{TAB}Id: => {movie.Id}");
+            Console.WriteLine($"{TAB}Id => {movie.Id}");
 
             var movieGenres = movie.MovieGenres;
             if (movie.MovieGenres is null)

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MovieLibrary.Interfaces;
 using MovieLibrary.Menus.MovieMenus;
+using MovieLibrary.Menus.UserMovies;
 using MovieLibraryEntities.Models;
 using System;
 
@@ -25,36 +26,60 @@ namespace MovieLibrary.Menus
                 switch (mainMenu.Result)
                 {
                     case 1:
-                        new SearchMenu(
-                            GetLogger<IMenu>(),
-                            provider.GetService<IFinder<Movie>>(),
-                            provider.GetService<IDisplay<Movie>>())
-                        .Start();
+                        var movieMenu = new MovieMenu(GetLogger<IMenu>());
+                        movieMenu.Start();
+                        SelectMovieMenu(movieMenu.Result);
                         break;
                     case 2:
-                        new AddMenu(
-                            GetLogger<IMenu>(),
-                            provider.GetService<IBuilder<Movie>>(),
-                            provider.GetService<IDisplay<Movie>>())
-                        .Start();
-                        break;
-                    case 3:
-                        new UpdateMenu(
-                            GetLogger<IMenu>(),
-                            provider.GetService<IDisplay<Movie>>(), 
-                            provider.GetService<IFinder<Movie>>(),
-                            provider.GetService<IUpdater<Movie>>())
-                        .Start();
-                        break;
-                    case 4:
-                        new DeleteMenu(
-                            GetLogger<IMenu>(),
-                            provider.GetService<IDeleter<Movie>>())
-                        .Start();
-                        break;
-                    default:
+                        var userMenu = new UserMenu(GetLogger<IMenu>());
+                        userMenu.Start();
+                        SelectUserMenu(userMenu.Result);
                         break;
                 }
+            }
+        }
+        private void SelectMovieMenu(int result)
+        {
+            switch (result)
+            {
+                case 1:
+                    new SearchMenu(
+                        GetLogger<IMenu>(),
+                        provider.GetService<IFinder<Movie>>(),
+                        provider.GetService<IDisplay<Movie>>())
+                    .Start();
+                    break;
+                case 2:
+                    new MovieMenus.AddMenu(
+                        GetLogger<IMenu>(),
+                        provider.GetService<IBuilder<Movie>>(),
+                        provider.GetService<IDisplay<Movie>>())
+                    .Start();
+                    break;
+                case 3:
+                    new UpdateMenu(
+                        GetLogger<IMenu>(),
+                        provider.GetService<IDisplay<Movie>>(),
+                        provider.GetService<IFinder<Movie>>(),
+                        provider.GetService<IUpdater<Movie>>())
+                    .Start();
+                    break;
+                case 4:
+                    new DeleteMenu(
+                        GetLogger<IMenu>(),
+                        provider.GetService<IDeleter<Movie>>())
+                    .Start();
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void SelectUserMenu(int result)
+        {
+            switch (result)
+            {
+                default:
+                    break;
             }
         }
         private ILogger<T> GetLogger<T>()

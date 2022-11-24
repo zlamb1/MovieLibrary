@@ -12,10 +12,14 @@ namespace MovieLibrary.Implementations.MovieImpl
         {
             var movie = new Movie();
 
+            if (args.Length < 3)
+            {
+                throw new ArgumentNullException("The movie builder expects three arguments!");
+            }
+
             if (string.IsNullOrEmpty((string)args[0]))
             {
-                throw new ArgumentNullException(
-                    "The movie title cannot be null/blank!\"");
+                throw new ArgumentNullException("The movie title cannot be null/blank!");
             }
 
             movie.Title = args[0].ToString();
