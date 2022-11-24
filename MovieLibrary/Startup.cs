@@ -6,6 +6,7 @@ using MovieLibraryEntities.Models;
 using MovieLibrary.Interfaces;
 using MovieLibrary.Menus;
 using MovieLibrary.Implementations.MovieImpl;
+using MovieLibrary.Implementations.UserImpl;
 
 namespace MovieLibrary
 {
@@ -19,13 +20,16 @@ namespace MovieLibrary
                 builder.AddConsole();
                 builder.AddFile("app.log");
             });
-            services.AddSingleton<IMenu, MainMenu>()
-            .AddSingleton<IMenuContext, MenuContext>()
-            .AddTransient<IFinder<Movie>, MovieFinder>()
-            .AddTransient<IDisplay<Movie>, MovieDisplay>()
-            .AddTransient<IBuilder<Movie>, MovieBuilder>()
-            .AddTransient<IUpdater<Movie>, MovieUpdater>()
-            .AddTransient<IDeleter<Movie>, MovieDeleter>();
+            services
+                .AddSingleton<IMenu, MainMenu>()
+                .AddSingleton<IMenuContext, MenuContext>()
+                .AddTransient<IFinder<Movie>, MovieFinder>()
+                .AddTransient<IDisplay<Movie>, MovieDisplay>()
+                .AddTransient<IBuilder<Movie>, MovieBuilder>()
+                .AddTransient<IUpdater<Movie>, MovieUpdater>()
+                .AddTransient<IDeleter<Movie>, MovieDeleter>()
+                .AddTransient<IDisplay<User>, UserDisplay>()
+                .AddTransient<IBuilder<User>, UserBuilder>();
             return services.BuildServiceProvider();
         }
     }

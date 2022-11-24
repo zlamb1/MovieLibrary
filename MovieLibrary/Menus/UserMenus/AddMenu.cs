@@ -5,16 +5,19 @@ using MovieLibrary.utility;
 using MovieLibraryEntities.Models;
 using System;
 
-namespace MovieLibrary.Menus.UserMovies
+namespace MovieLibrary.Menus.UserMenus
 {
     internal class AddMenu : Menu
     {
         // TODO: use dependency injection for these
-        private IBuilder<User> builder = new UserBuilder();
-        private IDisplay<User> display = new UserDisplay();
-        public AddMenu(ILogger<IMenu> _logger) : base(_logger)
+        private IBuilder<User> builder;
+        private IDisplay<User> display;
+        public AddMenu(ILogger<IMenu> _logger,
+            IBuilder<User> _builder,
+            IDisplay<User> _display) : base(_logger)
         {
-
+            builder = _builder;
+            display = _display;
         }
         public override void Start()
         {

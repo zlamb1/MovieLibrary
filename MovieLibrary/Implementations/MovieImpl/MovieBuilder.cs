@@ -1,4 +1,5 @@
-﻿using MovieLibrary.Interfaces;
+﻿using Microsoft.Extensions.Logging;
+using MovieLibrary.Interfaces;
 using MovieLibraryEntities.Context;
 using MovieLibraryEntities.Models;
 using System;
@@ -8,6 +9,13 @@ namespace MovieLibrary.Implementations.MovieImpl
 {
     internal class MovieBuilder : IBuilder<Movie>
     {
+        private ILogger<IBuilder<Movie>> logger;
+
+        public MovieBuilder(Logger<IBuilder<Movie>> _logger)
+        {
+            logger = _logger;
+        }
+
         public Movie Build(params object[] args)
         {
             var movie = new Movie();

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MovieLibrary.Interfaces;
 using MovieLibrary.Menus.MovieMenus;
-using MovieLibrary.Menus.UserMovies;
+using MovieLibrary.Menus.UserMenus;
 using MovieLibraryEntities.Models;
 using System;
 
@@ -78,6 +78,13 @@ namespace MovieLibrary.Menus
         {
             switch (result)
             {
+                case 1:
+                    new UserMenus.AddMenu(
+                        GetLogger<IMenu>(),
+                        provider.GetService<IBuilder<User>>(),
+                        provider.GetService<IDisplay<User>>())
+                    .Start();
+                    break;
                 default:
                     break;
             }
