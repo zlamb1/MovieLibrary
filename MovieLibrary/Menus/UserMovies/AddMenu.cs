@@ -39,6 +39,7 @@ namespace MovieLibrary.Menus.UserMovies
             }
             catch (Exception exc)
             {
+                LogError(exc.Message);
                 Console.WriteLine(exc.Message);
             }
 

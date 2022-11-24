@@ -46,7 +46,8 @@ namespace MovieLibrary.Menus.MovieMenus
             {
                 var movie = builder.Build(title, genres, releaseDate);
                 display.Display(movie);
-            } catch(Exception exc) { 
+            } catch(Exception exc) {
+                LogError(exc.Message);
                 Console.WriteLine(exc.Message);
             }
 

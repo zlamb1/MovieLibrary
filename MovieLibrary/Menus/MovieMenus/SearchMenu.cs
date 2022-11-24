@@ -50,6 +50,7 @@ namespace MovieLibrary.Menus.MovieMenus
                 }
                 catch (Exception exc)
                 {
+                    LogError(exc.Message);
                     Console.WriteLine(exc.Message);
                 }
 

@@ -28,6 +28,7 @@ namespace MovieLibrary.Menus.MovieMenus
                 deleter.Delete(movieName);
             } catch (Exception exc)
             {
+                LogError(exc.Message);
                 Console.WriteLine(exc.Message);
             }
 

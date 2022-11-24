@@ -12,7 +12,7 @@ namespace MovieLibrary.Menus
         protected int numberOfRestarts = 0;
         protected int allowedRestarts = 5;
 
-        private readonly ILogger<IMenu> logger;
+        protected readonly ILogger<IMenu> logger;
         private string msg = "Starting...";
         private LogLevel level = LogLevel.Information;
 
@@ -38,8 +38,7 @@ namespace MovieLibrary.Menus
         {
             if (numberOfRestarts >= allowedRestarts)
             {
-                logger.Log(LogLevel.Error, "The menu cannot restart more than " + allowedRestarts + " times!");
-                Thread.Sleep(3);
+                LogError($"The menu cannot restart more than {allowedRestarts} times!");
                 Console.WriteLine();
                 WaitForInput();
                 return;
@@ -50,6 +49,13 @@ namespace MovieLibrary.Menus
             numberOfRestarts++;
 
             Start();
+        }
+
+        protected void LogError(string msg)
+        {
+            logger.LogError(msg);
+            // sleep so the async log can complete before anything else
+            Thread.Sleep(3);
         }
 
         protected void WaitForInput(string _msg="Press enter to return. ")
