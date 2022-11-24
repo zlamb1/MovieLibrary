@@ -41,12 +41,12 @@ namespace MovieLibrary.Implementations.MovieImpl
             string genresStr = $"{TAB}Genres => ";
             foreach (var genre in movieGenres)
             {
-                if (genre != movie.MovieGenres.First())
+                if (genre != movieGenres.First())
                     genresStr += " | ";
                 genresStr += genre.Genre.Name;
             }
 
-            if (DisplayGenres && movie.MovieGenres.Count() > 0)
+            if (DisplayGenres && movieGenres != null && movieGenres.Count() > 0)
                 Console.WriteLine(genresStr);
 
             Console.WriteLine($"{TAB}Release Date => {movie.ReleaseDate}");

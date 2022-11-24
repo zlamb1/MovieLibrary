@@ -32,7 +32,6 @@ namespace MovieLibrary.Implementations.MovieImpl
                     UpdateReleaseDate(movie, val);
                     break;
                 default:
-                    logger.LogWarning("Invalid field number!");
                     throw new InvalidOperationException("Invalid field number!");
             }
         }
@@ -40,7 +39,6 @@ namespace MovieLibrary.Implementations.MovieImpl
         {
             if (string.IsNullOrEmpty(val))
             {
-                logger.LogWarning("The movie title cannot be null!");
                 throw new InvalidOperationException("The movie title cannot be null!");
             }
 
@@ -51,7 +49,6 @@ namespace MovieLibrary.Implementations.MovieImpl
 
                 if (aMovie is null)
                 {
-                    logger.LogWarning($"Could not find the movie =>{val}!");
                     throw new InvalidOperationException($"Could not find the movie => {val}!");
                 }
 
@@ -67,7 +64,6 @@ namespace MovieLibrary.Implementations.MovieImpl
         {
             if (string.IsNullOrEmpty(val))
             {
-                logger.LogWarning("The movie genres cannot be null!");
                 throw new InvalidOperationException("The movie genres cannot be null!");
             }
             string[] strGenres = val.Replace(" ", "").Split("|");
@@ -78,7 +74,6 @@ namespace MovieLibrary.Implementations.MovieImpl
                     .FirstOrDefault(x => x.Id == movie.Id);
                 if (aMovie is null)
                 {
-                    logger.LogWarning($"Could not find the movie => {val}!");
                     throw new InvalidOperationException($"Could not find the movie => {val}!");
                 }
 
@@ -95,7 +90,6 @@ namespace MovieLibrary.Implementations.MovieImpl
                         .FirstOrDefault(x => x.Name.Equals(genre));
                     if (found is null)
                     {
-                        logger.LogWarning($"The movie genre {genre} is not a valid genre!");
                         throw new InvalidOperationException(
                             $"The movie genre {genre} is not a valid genre!");
                     }
@@ -126,7 +120,6 @@ namespace MovieLibrary.Implementations.MovieImpl
                     .FirstOrDefault(x => x.Id == movie.Id);
                 if (aMovie is null)
                 {
-                    logger.LogWarning($"Could not find the movie => {val}!");
                     throw new InvalidOperationException($"Could not find the movie => {val}!");
                 }
 

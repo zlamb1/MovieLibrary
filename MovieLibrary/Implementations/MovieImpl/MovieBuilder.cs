@@ -34,6 +34,7 @@ namespace MovieLibrary.Implementations.MovieImpl
                 ctx.Movies.Add(movie);
                 ctx.SaveChanges();
             }
+
             // this code is used as well in the MovieUpdater
             // consider moving to a MovieGenreBuilder class?
             if (!string.IsNullOrEmpty((string)args[1]))

@@ -24,7 +24,6 @@ namespace MovieLibrary.Implementations.MovieImpl
 
                 if (aMovie is null)
                 {
-                    logger.LogWarning("Could not find a movie with the title => " + name);
                     throw new ArgumentException(
                         "Could not find a movie with the title => " + name);
                 }
