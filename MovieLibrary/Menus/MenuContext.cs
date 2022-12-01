@@ -46,29 +46,25 @@ namespace MovieLibrary.Menus
                     new SearchMenu(
                         GetLogger<IMenu>(),
                         provider.GetService<IFinder<Movie>>(),
-                        provider.GetService<IDisplay<Movie>>())
-                    .Start();
+                        provider.GetService<IDisplay<Movie>>()).Start();
                     break;
                 case 2:
                     new MovieMenus.AddMenu(
                         GetLogger<IMenu>(),
                         provider.GetService<IBuilder<Movie>>(),
-                        provider.GetService<IDisplay<Movie>>())
-                    .Start();
+                        provider.GetService<IDisplay<Movie>>()).Start();
                     break;
                 case 3:
                     new UpdateMenu(
                         GetLogger<IMenu>(),
                         provider.GetService<IDisplay<Movie>>(),
                         provider.GetService<IFinder<Movie>>(),
-                        provider.GetService<IUpdater<Movie>>())
-                    .Start();
+                        provider.GetService<IUpdater<Movie>>()).Start();
                     break;
                 case 4:
                     new DeleteMenu(
                         GetLogger<IMenu>(),
-                        provider.GetService<IDeleter<Movie>>())
-                    .Start();
+                        provider.GetService<IDeleter<Movie>>()).Start();
                     break;
                 default:
                     break;
@@ -82,8 +78,17 @@ namespace MovieLibrary.Menus
                     new UserMenus.AddMenu(
                         GetLogger<IMenu>(),
                         provider.GetService<IBuilder<User>>(),
-                        provider.GetService<IDisplay<User>>())
-                    .Start();
+                        provider.GetService<IDisplay<User>>()).Start();
+                    break;
+                case 2:
+                    new RatingMenu(
+                        provider.GetService<IFinder<Movie>>(),
+                        provider.GetService<IDisplay<Movie>>(),
+                        provider.GetService<IFinder<User>>(), 
+                        provider.GetService<IDisplay<User>>(),
+                        provider.GetService<IBuilder<UserMovie>>(),
+                        provider.GetService<IDisplay<UserMovie>>(),
+                        GetLogger<IMenu>()).Start();
                     break;
                 default:
                     break;

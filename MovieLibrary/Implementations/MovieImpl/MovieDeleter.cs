@@ -25,11 +25,11 @@ namespace MovieLibrary.Implementations.MovieImpl
                 if (aMovie is null)
                 {
                     throw new ArgumentException(
-                        "Could not find a movie with the title => " + name);
+                        $"Could not find a movie with the title => {name}");
                 }
                 else
                 {
-                    logger.LogInformation("Deleting Movie => " + name);
+                    logger.LogInformation($"Deleting Movie => {name}");
                     ctx.Movies.Remove(aMovie);
                 }
 

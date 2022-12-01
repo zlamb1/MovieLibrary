@@ -11,7 +11,7 @@ namespace MovieLibrary.Implementations.MovieImpl
     {
         private ILogger<IBuilder<Movie>> logger;
 
-        public MovieBuilder(Logger<IBuilder<Movie>> _logger)
+        public MovieBuilder(ILogger<IBuilder<Movie>> _logger)
         {
             logger = _logger;
         }

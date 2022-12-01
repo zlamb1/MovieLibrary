@@ -7,6 +7,9 @@ using MovieLibrary.Interfaces;
 using MovieLibrary.Menus;
 using MovieLibrary.Implementations.MovieImpl;
 using MovieLibrary.Implementations.UserImpl;
+using MovieLibrary.Implementations;
+using MovieLibrary.Implementations.UserMovieImpl;
+using MovieLibrary.Implementations.RatingImpl;
 
 namespace MovieLibrary
 {
@@ -23,13 +26,20 @@ namespace MovieLibrary
             services
                 .AddSingleton<IMenu, MainMenu>()
                 .AddSingleton<IMenuContext, MenuContext>()
-                .AddTransient<IFinder<Movie>, MovieFinder>()
-                .AddTransient<IDisplay<Movie>, MovieDisplay>()
+
                 .AddTransient<IBuilder<Movie>, MovieBuilder>()
-                .AddTransient<IUpdater<Movie>, MovieUpdater>()
                 .AddTransient<IDeleter<Movie>, MovieDeleter>()
+                .AddTransient<IDisplay<Movie>, MovieDisplay>()
+                .AddTransient<IFinder<Movie>, MovieFinder>()
+                .AddTransient<IUpdater<Movie>, MovieUpdater>()
+
+                .AddTransient<IBuilder<User>, UserBuilder>()
                 .AddTransient<IDisplay<User>, UserDisplay>()
-                .AddTransient<IBuilder<User>, UserBuilder>();
+                .AddTransient<IFinder<User>, UserFinder>()
+
+                .AddTransient<IBuilder<UserMovie>, RatingBuilder>()
+                .AddTransient<IDisplay<UserMovie>, RatingDisplay>();
+                
             return services.BuildServiceProvider();
         }
     }

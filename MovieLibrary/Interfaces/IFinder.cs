@@ -5,8 +5,8 @@ namespace MovieLibrary.Interfaces
     internal interface IFinder<T>
     {
 
-        T First(string name);
-        List<T> Find(string name);
+        T First(string id);
+        List<T> Find(string id);
 
     }
 }

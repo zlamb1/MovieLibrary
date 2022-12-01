@@ -12,8 +12,9 @@ namespace MovieLibrary.Menus.UserMenus
             base.Start();
             Console.WriteLine("Choose an option: ");
             Console.WriteLine("1) Add User");
+            Console.WriteLine("2) Enter Rating");
             var choice = InputUtility.GetInt32WithPrompt();
-            if (!choice.Item1 || (choice.Item2 < 1 || choice.Item2 > 1))
+            if (!choice.Item1 || (choice.Item2 < 1 || choice.Item2 > 2))
             {
                 Restart("That is not a valid choice!");
                 return;

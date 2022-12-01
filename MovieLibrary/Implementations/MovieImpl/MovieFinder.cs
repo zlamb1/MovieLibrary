@@ -9,22 +9,22 @@ namespace MovieLibrary.Implementations.MovieImpl
 {
     internal class MovieFinder : IFinder<Movie>
     {
-        public Movie First(string name)
+        public Movie First(string id)
         {
             using (var ctx = new MovieContext())
             {
                 return ctx.Movies
                     .Include("MovieGenres.Genre")
-                    .FirstOrDefault(x => x.Title.StartsWith(name));
+                    .FirstOrDefault(x => x.Title.StartsWith(id));
             }
         }
 
-        public List<Movie> Find(string name)
+        public List<Movie> Find(string id)
         {
             using (var ctx = new MovieContext())
             {
                 return ctx.Movies
-                    .Where(x => x.Title.StartsWith(name))
+                    .Where(x => x.Title.StartsWith(id))
                     .Include("MovieGenres.Genre")
                     .ToList();
             }
