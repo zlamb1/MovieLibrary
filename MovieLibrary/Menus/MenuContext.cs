@@ -90,6 +90,12 @@ namespace MovieLibrary.Menus
                         provider.GetService<IDisplay<UserMovie>>(),
                         GetLogger<IMenu>()).Start();
                     break;
+                case 3:
+                    new SortMenu(
+                        provider.GetService<IFinder<Occupation>>(),
+                        provider.GetService<ISorter<UserMovie>>(),
+                        GetLogger<IMenu>()).Start();
+                    break;
                 default:
                     break;
             }

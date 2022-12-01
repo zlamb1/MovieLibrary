@@ -10,6 +10,7 @@ using MovieLibrary.Implementations.UserImpl;
 using MovieLibrary.Implementations;
 using MovieLibrary.Implementations.UserMovieImpl;
 using MovieLibrary.Implementations.RatingImpl;
+using MovieLibrary.Implementations.OccupationImpl;
 
 namespace MovieLibrary
 {
@@ -38,7 +39,10 @@ namespace MovieLibrary
                 .AddTransient<IFinder<User>, UserFinder>()
 
                 .AddTransient<IBuilder<UserMovie>, RatingBuilder>()
-                .AddTransient<IDisplay<UserMovie>, RatingDisplay>();
+                .AddTransient<IDisplay<UserMovie>, RatingDisplay>()
+                .AddTransient<ISorter<UserMovie>, RatingSorter>()
+                
+                .AddTransient<IFinder<Occupation>, OccupationFinder>();
                 
             return services.BuildServiceProvider();
         }
