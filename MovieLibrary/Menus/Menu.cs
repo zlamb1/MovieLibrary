@@ -10,7 +10,7 @@ namespace MovieLibrary.Menus
         public int Result { get; set; }
         
         protected int numberOfRestarts = 0;
-        protected int allowedRestarts = 5;
+        protected int allowedRestarts = 10;
 
         protected readonly ILogger<IMenu> logger;
         private string msg = "Starting...";

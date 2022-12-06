@@ -80,6 +80,7 @@ namespace MovieLibrary.Menus.UserMenus
             }
             catch (Exception exc)
             {
+                LogError(exc.Message);
                 Console.WriteLine(exc.Message);
             }
 
@@ -92,6 +93,7 @@ namespace MovieLibrary.Menus.UserMenus
                 var _rating = ratingBuilder.Build(user, movie, rating);
                 ratingDisplay.Display(_rating);
             } catch (Exception exc) {
+                LogError(exc.Message);
                 Console.WriteLine(exc.Message);
             }
 

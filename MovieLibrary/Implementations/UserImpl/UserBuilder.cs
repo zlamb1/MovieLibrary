@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MovieLibrary.Interfaces;
 using MovieLibraryEntities.Context;
 using MovieLibraryEntities.Models;
@@ -12,6 +13,7 @@ namespace MovieLibrary.Implementations.UserImpl
     {
         public UserBuilder()
         {
+
         }
 
         public User Build(params object[] args)

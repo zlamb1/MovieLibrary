@@ -9,11 +9,9 @@ namespace MovieLibrary.Implementations.MovieImpl
 {
     internal class MovieBuilder : IBuilder<Movie>
     {
-        private ILogger<IBuilder<Movie>> logger;
-
-        public MovieBuilder(ILogger<IBuilder<Movie>> _logger)
+        public MovieBuilder()
         {
-            logger = _logger;
+ 
         }
 
         public Movie Build(params object[] args)

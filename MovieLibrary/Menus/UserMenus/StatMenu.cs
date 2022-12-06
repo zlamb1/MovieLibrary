@@ -29,13 +29,19 @@ namespace MovieLibrary.Menus.UserMenus
             base.Start();
 
             var list = userSorter.Sort();
-            var userInfo = (UserInfo)list[0];
 
-            Console.WriteLine("User Statistics =>");
-            Console.WriteLine($"\tAverage User Age => {(int)userInfo.GetAverageAge()} years old");
-            Console.WriteLine($"\tAverage User Occupation => {userInfo.GetMostPopularOccupation().Name}");
-            Console.WriteLine($"\tNumber of Male Users => {userInfo.TotalMales}");
-            Console.WriteLine($"\tNumber of Female Users => {userInfo.TotalFemales}");
+            if (list.Count > 0)
+            {
+                var userInfo = (UserInfo)list[0];
+                Console.WriteLine("User Statistics =>");
+                Console.WriteLine($"\tAverage User Age => {(int)userInfo.GetAverageAge()} years old");
+                Console.WriteLine($"\tAverage User Occupation => {userInfo.GetMostPopularOccupation().Name}");
+                Console.WriteLine($"\tNumber of Male Users => {userInfo.TotalMales}");
+                Console.WriteLine($"\tNumber of Female Users => {userInfo.TotalFemales}");
+            } else
+            {
+                Console.WriteLine("Couldn't find any users to sort!");
+            }
 
             Console.WriteLine();
             WaitForInput();
