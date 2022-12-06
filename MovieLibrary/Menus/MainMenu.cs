@@ -20,7 +20,7 @@ namespace MovieLibrary.Menus
             Console.WriteLine("1) Movie Menu");
             Console.WriteLine("2) User Menu");
             var choice = InputUtility.GetInt32WithPrompt();
-            if (!choice.Item1 || (choice.Item2 < 1 || choice.Item2 > 4))
+            if (!choice.Item1 || (choice.Item2 < 1 || choice.Item2 > 2))
             {
                 Restart("That is not a valid choice!");
                 return;

@@ -48,16 +48,19 @@ namespace MovieLibrary.Menus.UserMenus
             try
             {
                 var sortedRatings = ratingSorter.Sort(foundOccupation);
-                for (int i = 0; i < Math.Min(5, sortedRatings.Count()); i++)
+                for (int i = 0; i < Math.Min(1, sortedRatings.Count()); i++)
                 {
                     var rating = (RatingInfo) sortedRatings[i];
                     Console.WriteLine($"Top Rated Movie => {rating.MovieTitle}");
                     Console.WriteLine($"Occupation => {rating.OccupationName}");
                     Console.WriteLine($"Total Rating => {rating.TotalRating}");
+                    Console.WriteLine($"Number of Ratings => {rating.NumberOfRatings}");
+                    Console.WriteLine($"Average Rating => {rating.AverageRating}/5");
                     Console.WriteLine();
                 }
             } catch (Exception exc)
             {
+                LogError(exc.Message);
                 Console.WriteLine(exc.Message);
             }
 

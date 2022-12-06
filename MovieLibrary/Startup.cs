@@ -7,7 +7,6 @@ using MovieLibrary.Interfaces;
 using MovieLibrary.Menus;
 using MovieLibrary.Implementations.MovieImpl;
 using MovieLibrary.Implementations.UserImpl;
-using MovieLibrary.Implementations;
 using MovieLibrary.Implementations.UserMovieImpl;
 using MovieLibrary.Implementations.RatingImpl;
 using MovieLibrary.Implementations.OccupationImpl;
@@ -37,6 +36,7 @@ namespace MovieLibrary
                 .AddTransient<IBuilder<User>, UserBuilder>()
                 .AddTransient<IDisplay<User>, UserDisplay>()
                 .AddTransient<IFinder<User>, UserFinder>()
+                .AddTransient<ISorter<User>, UserSorter>()
 
                 .AddTransient<IBuilder<UserMovie>, RatingBuilder>()
                 .AddTransient<IDisplay<UserMovie>, RatingDisplay>()

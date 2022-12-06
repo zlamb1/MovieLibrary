@@ -17,6 +17,8 @@ namespace MovieLibrary.Implementations.RatingImpl
         public string MovieTitle { get; set; }
         public string OccupationName { get; set; }
         public long TotalRating { get; set; }
+        public int NumberOfRatings { get; set; }
+        public float AverageRating { get; set; }
     }
     internal class RatingSorter : ISorter<UserMovie>
     {
@@ -24,8 +26,7 @@ namespace MovieLibrary.Implementations.RatingImpl
         {
             if (args[0] == null || args[0] is not Occupation)
             {
-                throw new ArgumentNullException(
-                    "Cannot sort ratings with an invalid occupation!");
+                throw new ArgumentNullException("Cannot sort ratings with an invalid occupation!");
             }
 
             var occupation = (Occupation) args[0];
@@ -47,10 +48,15 @@ namespace MovieLibrary.Implementations.RatingImpl
                         ratingInfo.MovieTitle = userMovie.Movie.Title;
                         ratingInfo.OccupationName = userMovie.User.Occupation.Name;
                         ratingInfo.TotalRating = userMovie.Rating;
+                        ratingInfo.NumberOfRatings = 1;
+                        ratingInfo.AverageRating = userMovie.Rating;
                         ratings.Add(ratingInfo);
                     } else
                     {
                         ratingInfo.TotalRating += userMovie.Rating;
+                        ratingInfo.NumberOfRatings += 1;
+                        ratingInfo.AverageRating = 
+                            (float)ratingInfo.TotalRating / (float)ratingInfo.NumberOfRatings;
                     }
                 }
             }

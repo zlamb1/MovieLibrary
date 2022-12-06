@@ -64,6 +64,9 @@ namespace MovieLibrary.Implementations.MovieImpl
 
                         if (foundGenre is null)
                         {
+                            // remove the movie if there is an invalid genre
+                            ctx.Remove(movie);
+                            ctx.SaveChanges();
                             throw new ArgumentException(
                                 $"Could not find the genre: {genre}");
                         }
